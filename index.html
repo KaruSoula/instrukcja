@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instrukcja obsługi – KaruSoula Atelier</title>
+  <link rel="icon" type="image/webp" href="https://raw.githubusercontent.com/KaruSoula/assets/main/favicon.webp">
+  
+  <!-- Import czcionek: Averia Sans Libre (tytuł i kroki), Lora oraz Manrope (treść) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Sans+Libre:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --card-bg: #ffffff;
+      --text-main: #1f1f1f;
+      --text-muted: #4b5563;
+      --navy-accent: #0b2559;
+      --navy-light: #f0f4fa;
+      --burgundy-accent: #8b1114;
+      --burgundy-light: #fdf2f2;
+      --gold-accent: #cbb279;
+      --border-color: #eae5de;
+      --border-subtle: #f0ece6;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 45px 20px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 35px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .brand-logo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 140px;
+    }
+
+    .brand-logo-img {
+      width: 105px;
+      height: 105px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .brand-logo-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #1e1e1e;
+      margin-top: 6px;
+      text-align: center;
+    }
+
+    .header-content-col {
+      flex: 1;
+    }
+
+    .main-title {
+      font-family: 'Averia Sans Libre', 'Averia Sans', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.2px;
+    }
+
+    .main-title .navy {
+      color: var(--navy-accent);
+    }
+
+    .main-title .burgundy {
+      color: var(--burgundy-accent);
+    }
+
+    .header-intro-text {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    /* Zwijany i rozsuwany Spis Treści */
+    .toc-wrapper {
+      margin: 28px 0 35px 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: #faf8f5;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(11, 37, 89, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .toc-wrapper[open] {
+      border-color: #dfd8cc;
+    }
+
+    .toc-summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 22px;
+      cursor: pointer;
+      user-select: none;
+      background: #faf8f5;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18.5px;
+      font-weight: 700;
+      color: var(--navy-accent);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .toc-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .toc-summary:hover {
+      background-color: #f3efe9;
+    }
+
+    .toc-summary-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toc-icon-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--navy-accent);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+    }
+
+    .toc-toggle-icon {
+      width: 22px;
+      height: 22px;
+      stroke: var(--navy-accent);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .toc-wrapper[open] .toc-toggle-icon {
+      transform: rotate(180deg);
+    }
+
+    .toc-content {
+      padding: 10px 22px 22px 22px;
+      border-top: 1px solid var(--border-subtle);
+      background-color: #ffffff;
+    }
+
+    .toc-subnote {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Dwie równe pionowe kolumny spisu treści */
+    .toc-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 26px;
+    }
+
+    .toc-col {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      font-size: 14.5px;
+    }
+
+    .toc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #2a2a2a;
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      width: 100%;
+      font-weight: 500;
+      transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    }
+
+    .toc-link::before {
+      content: "•";
+      color: var(--burgundy-accent);
+      font-size: 16px;
+      line-height: 1;
+      display: inline-block;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+
+    .toc-link:hover {
+      background-color: var(--navy-light);
+      color: var(--navy-accent);
+      transform: translateX(3px);
+    }
+
+    .toc-link:hover::before {
+      color: var(--navy-accent);
+      transform: translateX(2px);
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 28px 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 3px 12px rgba(11, 37, 89, 0.03);
+      scroll-margin-top: 24px;
+    }
+
+    .step-title {
+      font-family: 'Averia Sans Libre', 'Averia Sans', sans-serif;
+      font-size: 23px;
+      margin-bottom: 18px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .step-num {
+      color: var(--burgundy-accent);
+      margin-right: 6px;
+    }
+
+    .step-heading-text {
+      color: var(--navy-accent);
+    }
+
+    .step-content p {
+      margin-bottom: 14px;
+      font-size: 15px;
+      color: #242424;
+    }
+
+    .step-content ul,
+    .step-content ol {
+      margin-left: 22px;
+      margin-bottom: 16px;
+    }
+
+    .step-content li {
+      margin-bottom: 10px;
+      font-size: 15px;
+      padding-left: 4px;
+      color: #242424;
+    }
+
+    /* Wyróżnienia zrzutowe */
+    .hl-burgundy-italic {
+      color: var(--burgundy-accent);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .hl-navy-italic {
+      color: var(--navy-accent);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .hl-navy-bold {
+      color: var(--navy-accent);
+      font-weight: 700;
+    }
+
+    .hl-dark-italic {
+      color: #181818;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .note-block {
+      margin: 14px 0;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .note-block ul {
+      margin-top: 8px;
+      margin-left: 20px;
+    }
+
+    .note-block li {
+      margin-bottom: 8px;
+    }
+
+    .card-extra-note {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    code {
+      background-color: #f7f4ef;
+      border: 1px solid #e7e1d6;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: var(--burgundy-accent);
+      font-weight: 600;
+    }
+
+    /* Układy kontenerów na zdjęcia */
+    .images-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .images-row.single-left {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .images-row.single-left .image-box {
+      width: calc(50% - 9px);
+    }
+
+    .images-row.full-width {
+      display: block;
+      width: 100%;
+      margin-top: 22px;
+    }
+
+    .images-row.full-width .image-box {
+      width: 100%;
+    }
+
+    .images-row.full-width .image-box img {
+      width: 100%;
+      height: auto;
+      max-height: 440px;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .image-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      cursor: zoom-in;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+    }
+
+    .image-box img:hover {
+      opacity: 0.96;
+      transform: scale(1.01);
+      box-shadow: 0 4px 16px rgba(11, 37, 89, 0.08);
+    }
+
+    .image-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 7px;
+      text-align: center;
+    }
+
+    /* Układ Kroku 11: 3 większe grafiki w lewej kolumnie, wideo po prawej o równej wysokości */
+    .reels-showcase {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 18px;
+      margin-top: 22px;
+      align-items: stretch;
+    }
+
+    .reels-images-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reels-images-col .image-box {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .reels-images-col .image-box img {
+      width: 100%;
+      height: 185px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      cursor: zoom-in;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+    }
+
+    .reels-images-col .image-box img:hover {
+      opacity: 0.96;
+      transform: scale(1.01);
+      box-shadow: 0 4px 16px rgba(11, 37, 89, 0.08);
+    }
+
+    .reels-images-col .image-caption {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .reels-video-col {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .reels-video-col .image-box {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .reels-video-col video {
+      width: 100%;
+      flex: 1 1 0%;
+      min-height: 0;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      display: block;
+      background-color: #0b162c;
+      box-shadow: 0 3px 12px rgba(11, 37, 89, 0.05);
+    }
+
+    .reels-video-col .image-caption {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-align: center;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 0;
+      color: var(--text-muted);
+      font-size: 14.5px;
+      border-top: 1px solid var(--border-color);
+      margin-top: 45px;
+    }
+
+    /* Modal Lightbox */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 22, 44, 0.88);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+      padding: 20px;
+    }
+
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-modal img {
+      max-width: 92vw;
+      max-height: 90vh;
+      border-radius: 6px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      cursor: default;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      color: #ffffff;
+      background: transparent;
+      border: none;
+      font-size: 38px;
+      line-height: 1;
+      font-weight: 300;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .lightbox-close:hover {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 740px) {
+      .header-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
+      .main-title {
+        font-size: 26px;
+      }
+      .step-card {
+        padding: 20px 18px;
+      }
+      .toc-columns {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+      .images-row {
+        grid-template-columns: 1fr;
+      }
+      .images-row.single-left .image-box {
+        width: 100%;
+      }
+      .reels-showcase {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .reels-images-col .image-box img {
+        height: 200px;
+      }
+      .reels-video-col video {
+        min-height: 480px;
+        height: 480px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="header-main">
+        <div class="brand-logo-col">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/favicon.webp" alt="Logo KaruSoula Atelier" class="brand-logo-img">
+          <div class="brand-logo-name">KaruSoula Atelier</div>
+        </div>
+
+        <div class="header-content-col">
+          <h1 class="main-title">
+            <span class="navy">Witaj w </span><span class="burgundy">KaruSoula Atelier</span><span class="navy"> - Twoim osobistym Studio Karuzel! 🖤</span>
+          </h1>
+        </div>
+      </div>
+
+      <p class="header-intro-text">
+        To aplikacja zdejmie z Twoich barków cały ciężar związany z „produkcją” karuzel na Instagrama, postów na Facebooka i LinkedIn. Masz pełną kontrolę nad treścią, a system dba o to, by każda karuzela wyglądała spójnie, ekskluzywnie i profesjonalnie.
+      </p>
+
+      <!-- Zwijana / rozsuwana sekcja spisu treści -->
+      <details class="toc-wrapper" open>
+        <summary class="toc-summary">
+          <div class="toc-summary-left">
+            <span class="toc-icon-badge">☰</span>
+            <span>Spis treści: Jak stworzyć idealną karuzelę w prostych krokach</span>
+          </div>
+          <svg class="toc-toggle-icon" viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </summary>
+        
+        <div class="toc-content">
+          <p class="toc-subnote">Kliknij wybrany temat, aby natychmiast przejść do jego opisu:</p>
+          
+          <div class="toc-columns">
+            <!-- Kolumna 1: pozycje 1 - 8 -->
+            <ul class="toc-col">
+              <li class="toc-item">
+                <a href="#krok-1" class="toc-link">
+                  <span>Zacznij od dobrego planu (Strateg Kontentowy)</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-2" class="toc-link">
+                  <span>Rozwiń swój temat w całą karuzelę</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-3" class="toc-link">
+                  <span>AI pisze treść</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-4" class="toc-link">
+                  <span>Jak generować slajdy</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-5" class="toc-link">
+                  <span>Jak generować grafikę na pierwszy slajd</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-6" class="toc-link">
+                  <span>Post na Facebooka</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-7" class="toc-link">
+                  <span>Slajd na Story</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-8" class="toc-link">
+                  <span>Tekst na Instagram</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Kolumna 2: pozycje 9 - 15 -->
+            <ul class="toc-col">
+              <li class="toc-item">
+                <a href="#krok-9" class="toc-link">
+                  <span>Skąd wziąć PDF dla LinkedIn</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-10" class="toc-link">
+                  <span>Jak wygenerować tekst na bloga</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-11" class="toc-link">
+                  <span>Zamień swoją karuzelę w rolkę (Reels)</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-12" class="toc-link">
+                  <span>Scenariusz rolki</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-13" class="toc-link">
+                  <span>Wszystkie Twoje teksty</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-14" class="toc-link">
+                  <span>Pobierz całość elegancko</span>
+                </a>
+              </li>
+              <li class="toc-item">
+                <a href="#krok-15" class="toc-link">
+                  <span>Poczuj się bezpiecznie (Archiwum)</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </header>
+
+    <!-- Krok 1 -->
+    <section class="step-card" id="krok-1">
+      <div class="step-title">
+        <span class="step-num">Krok 1:</span>
+        <span class="step-heading-text">Zacznij od dobrego planu (praca ze Strategiem Kontentowym)</span>
+      </div>
+      <div class="step-content">
+        <ul>
+          <li>To, co publikujesz, warto mądrze zaplanować. Pomoże Ci w tym Strateg Kontentowy. Kliknij przycisk <span class="hl-burgundy-italic">Asystent Rozruchu - Strateg Kontentowy</span> – a otworzy się okno rozmowy, podczas której Twój osobisty doradca najpierw pozna Twoją ofertę i Twoich klientów, a potem ułoży dla Ciebie pełną listę publikacji na 30 dni.</li>
+          <li>Ta lista nie jest przypadkowa! Zostanie ułożona już w rekomendowanej kolejności publikacji. Asystent będzie na niej przeplatał w przemyślanych proporcjach tematy z różnych dziedzin budowania marki: posty edukacyjne, budujące zaufanie, budujące relację i sprzedażowe.</li>
+          <li>Wystarczy, że pod tematem na liście klikniesz <span class="hl-burgundy-italic">Wykorzystaj</span>, a temat sam wskoczy do Okna Pracy (i zapisze się na liście Wykorzystane na samym dole – gdybyś kiedyś chciała do niego powrócić).</li>
+        </ul>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> lista tematów czeka na Ciebie zawsze pod przyciskiem <span class="hl-burgundy-italic">Twój plan publikacji</span>.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> jeśli jakiś temat zdecydowanie Ci nie leży, po prostu usuń go z listy (masz przycisk <span class="hl-dark-italic">Usuń</span> pod każdym tematem).
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Ale uwaga:</span> lista jest zaplanowana na zapamiętanie maksymalnie 60. tematów. Jeśli więcej niż raz rozpoczniesz nową rozmowę z Asystentem i dostaniesz nowe listy, nowe tematy zastąpią stare.
+        </div>
+      </div>
+      
+      <!-- Rząd 1 grafik w Kroku 1 -->
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-wywo%C5%82uj%C4%85cy-Stratega-Kontentu.webp" alt="Krok 1 – Przycisk wywołujący Stratega Kontentu" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk wywołujący Stratega Kontentu)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-okno-pracy-ze-Strategiem-Kontentu.webp" alt="Krok 1 – Okno pracy ze Strategiem Kontentu" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Okno pracy ze Strategiem Kontentu)</div>
+        </div>
+      </div>
+
+      <!-- Rząd 2 grafik w Kroku 1 -->
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Zapisana-lista-pubikacji.webp" alt="Krok 1 – Przycisk Zapisana lista publikacji" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Zapisana lista publikacji)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-lista-publikacji-po-otarciu.webp" alt="Krok 1 – Lista publikacji po otwarciu" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Lista publikacji po otwarciu)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 2 -->
+    <section class="step-card" id="krok-2">
+      <div class="step-title">
+        <span class="step-num">Krok 2:</span>
+        <span class="step-heading-text">Twój własny pomysł na karuzelę</span>
+      </div>
+      <div class="step-content">
+        <ul>
+          <li>A może masz własny pomysł, coś Ci wpadło do głowy na szybko, jakiś dylemat pcha się na karuzelę? Nie musisz korzystać z pomocy Stratega i jego listy publikacji. Możesz wygenerować 5 angażujących pomysłów tylko na ten jeden frapujący temat! Po prostu wpisz go "na surowo" w oknie, zatytułowanym <span class="hl-burgundy-italic">💡 Pomysły na karuzele</span>.</li>
+          <li>Teraz wystarczy, że klikniesz <span class="hl-dark-italic">Generuj pomysły</span>, a aplikacja zrobi risercz na zadany temat wygeneruje 5 angażujących punktów widzenia, z tytułem na pierwszy slajd już sformułowanym w "haczyk" i z krótkim opisem.</li>
+          <li>Któraś z propozycji Ci się spodobała? Kliknij <span class="hl-burgundy-italic">Użyj tego tematu</span>, a automatycznie zostanie on dodany do okna pracy.</li>
+        </ul>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> jeśli zdecydujesz się na jeden temat, pozostałych nie musisz stracić! Po prostu kliknij <span class="hl-burgundy-italic">Zapisz na później</span> - a aplikacja zapamięta 20 zapisanych tematów.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Ale UWAGA:</span> możesz zapisać 20 tematów. Jeśli zapiszesz dwudziesty pierwszy, nowy temat „wypchnie” z lity pierwszy zapisany!
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Jak się dostać do zapisanych tematów?</span> Przy prawej krawędzi okna edytora znajdziesz zakładkę „Zapisane tematy”. Kliknij ją, a otworzy się okienko z listą tematów.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Jak wybrać temat do pracy?</span> Kliknij wybrany temat z listy – sam wskoczy do okna roboczego.
+        </div>
+      </div>
+      <!-- Rząd 1 grafik w Kroku 2 -->
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-pole-Temat-i-przycisk-Generuj-tematy.webp" alt="Krok 2 – Pole Temat i przycisk Generuj tematy" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Pole Temat i przycisk Generuj tematy)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-zakladka-Zapisane-tematy.webp" alt="Krok 2 – Zakładka Zapisane tematy" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Zakładka Zapisane tematy)</div>
+        </div>
+      </div>
+
+      <!-- Rząd 2 grafik w Kroku 2: Dawna prawa grafika przeniesiona pod spód po lewej -->
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-otwarta-zakladka-Zapisane-tematy.webp" alt="Krok 2 – Otwarta zakładka Zapisane tematy" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Otwarta zakładka Zapisane tematy)</div>
+        </div>
+      </div>
+
+      <!-- Dodatkowa informacja o pamięci przeglądarki pod zrzutami ekranu -->
+      <div class="note-block card-extra-note">
+        <span class="hl-navy-bold">Ale UWAGA:</span> Zapisana i zapamiętana lista tematów zapisuje się tylko w tej konkretnej przeglądarce. Przetrwa odświeżenie strony lub zamknięcie karty, o to się nie martw. Jeśli jednak otworzysz KaruSoulę w innej przeglądarce lub na innym komputerze, listy zapisanych tematów tam nie znajdziesz. Jednak gdy wrócisz do tej przeglądarki, lista znów będzie na ciebie czekała.
+      </div>
+    </section>
+
+    <!-- Krok 3 -->
+    <section class="step-card" id="krok-3">
+      <div class="step-title">
+        <span class="step-num">Krok 3:</span>
+        <span class="step-heading-text">Zagoń sztuczną inteligencję do pisania treści (AI pisze treść)</span>
+      </div>
+      <div class="step-content">
+        <p>Temat jest już w oknie pracy? Kliknij przycisk <span class="hl-burgundy-italic">AI: Napisz Treść</span>.</p>
+        <ul>
+          <li>System przygotuje merytoryczny tekst podzielony automatycznie na slajdy – wolny od sztucznego clickbaitu i taniej czułostkowości.</li>
+        </ul>
+        <p>Całość zobaczysz w Oknie Pracy, ale nie musisz tam wprowadzać poprawek – znacznie wygodniejsza jest bezpośrednia praca na wizualnych slajdach w kolejnym kroku.</p>
+      </div>
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-AI-Generuj-tresc.webp" alt="Krok 3 – Przycisk AI: Napisz Treść" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk AI: Napisz Treść)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 4 -->
+    <section class="step-card" id="krok-4">
+      <div class="step-title">
+        <span class="step-num">Krok 4:</span>
+        <span class="step-heading-text">Ożyw swoją treść (jak generować slajdy)</span>
+      </div>
+      <div class="step-content">
+        <p>Kliknij przycisk <span class="hl-burgundy-italic">Generuj slajdy</span>. Aplikacja natychmiast przeniesie tytuły oraz treść na plansze w podglądzie poniżej, ułożone w kolejności publikacji.</p>
+        <ul>
+          <li><span class="hl-navy-bold">Oswajanie treści:</span> Edytuj teksty bezpośrednio na slajdach (zarówno nagłówki, jak i treść główną). Po kliknięciu poza polem tekstowym zmiana zapisze się w systemie.</li>
+          <li><span class="hl-navy-bold">Steruj wielkością:</span> Kliknięcie w kontener z tekstem wywołuje toolbar <code>A+ / A-</code>, którym wygodnie skalujesz rozmiar fontu.</li>
+          <li><span class="hl-navy-bold">Steruj uwagą:</span> Zaznacz fragment tekstu i użyj skrótu <code>CTRL+B</code>. Aplikacja podmieni kolor zaznaczenia na Twój dedykowany kolor akcentu z palety. Działa to również w tytułach!</li>
+        </ul>
+      </div>
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Generuj-slajdy.webp" alt="Krok 4 – Przycisk Generuj slajdy" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Generuj slajdy)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-sterowania-wielkoscia-czcionki.webp" alt="Krok 4 – Sterowanie wielkością czcionki" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk sterowania wielkością czcionki)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 5 -->
+    <section class="step-card" id="krok-5">
+      <div class="step-title">
+        <span class="step-num">Krok 5:</span>
+        <span class="step-heading-text">Oprawa graficzna (jak generować grafikę na pierwszy slajd)</span>
+      </div>
+      <div class="step-content">
+        <ul>
+          <li><span class="hl-navy-bold">Piękna okładka:</span> Ponieważ okładki są widoczne w feedzie, grafika na pierwszym slajdzie generowana jest przez AI w indywidualnym stylu.</li>
+          <li><span class="hl-navy-bold">Zmiana i historia okładki:</span> Przycisk <span class="hl-burgundy-italic">Regeneruj grafikę</span> tworzy nowy wariant. Aplikacja zapamiętuje do 5 wygenerowanych miniatur pod slajdem, więc zawsze możesz wrócić do wcześniejszej. Możesz też wgrać własny plik.</li>
+          <li><span class="hl-navy-bold">Skalowanie i pozycja:</span> Narzędziownik <code>+/-</code> powiększa lub pomniejsza grafikę. Możesz ją też swobodnie przeciągać myszką oraz decydować, czy tytuł znajduje się u góry, czy na dole.</li>
+          <li><span class="hl-navy-bold">Pozostałe slajdy (Magazyn Grafik):</span> Slajdy 2–10 korzystają ze spójnego magazynu grafik Atelier. Przycisk <span class="hl-dark-italic">Inna grafika</span> podmienia obraz losowo na inny z bazy.</li>
+          <li><span class="hl-navy-bold">Układ elementów:</span> Strzałkami pod slajdem decydujesz, czy grafika ma znajdować się nad tekstem, pod nim, na samej górze, czy na dole planszy.</li>
+          <li><span class="hl-navy-bold">Dłuższy tekst?</span> Możesz w ogóle ukryć grafikę za pomocą przycisku <span class="hl-burgundy-italic">Ukryj grafikę</span> i zrobić slajd wyłącznie tekstowy. To się także przydaje, gdy chcesz wrzucić na cały slajd np. złotą myśl i pokazać ją na pustym slajdzie, żeby lepiej wybrzmiała.</li>
+        </ul>
+      </div>
+      <!-- Rząd 1 grafik w Kroku 5 -->
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Generuj-grafik%C4%99.webp" alt="Krok 5 – Przycisk Generuj grafikę" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Generuj grafikę)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Regenruj-grafike.webp" alt="Krok 5 – Przycisk Regeneruj grafikę" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Regeneruj grafikę)</div>
+        </div>
+      </div>
+      <!-- Rząd 2 grafik w Kroku 5: Pojedyncza grafika sterowania grafikami po lewej -->
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-sterowania-grafikami.webp" alt="Krok 5 – Przyciski sterowania grafikami" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przyciski sterowania grafikami)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 6 -->
+    <section class="step-card" id="krok-6">
+      <div class="step-title">
+        <span class="step-num">Krok 6:</span>
+        <span class="step-heading-text">Post na Facebooka</span>
+      </div>
+      <div class="step-content">
+        <p>Gdy karuzela jest ukończona, kliknij pod ostatnim slajdem przycisk <span class="hl-burgundy-italic">Generuj post FB</span>. Aplikacja automatycznie:</p>
+        <ol>
+          <li>
+            Wygeneruje kwadratową grafikę z zachowaniem tytułu i grafiki z okładki karuzeli (również z opcją edycji ułożenia i wielkości).
+            <div class="note-block">
+              <span class="hl-navy-italic">Pro tip:</span> Możesz myszką przeciągać grafikę po slajdzie i dowolnie zmieniać rozmiar grafiki i czcionki tytułu, aż uznasz, że wygląda ładnie. Aplikacja wrzuca składniki na grafikę, ale nie decyduje, jak mają wyglądać.
+            </div>
+            <div class="note-block">
+              <span class="hl-navy-italic">Pro tip:</span> Grafikę na FB możesz pobrać osobno lub w całej paczce ZIP.
+            </div>
+          </li>
+          <li>
+            Aplikacja przeczyta treść wszystkich slajdów, wyciągnie z nich najważniejsze punkty, streści i ułoży z nich post na Facebooka, dorzucając 2-3 hasztagi, które warto umieścić (ale możesz je też skasować).
+          </li>
+        </ol>
+      </div>
+
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Generuj-post-FB.webp" alt="Krok 6 – Przycisk Generuj post FB" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Generuj post FB)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-sterowania-wygladem-grafiki-na-FB.webp" alt="Krok 6 – Sterowanie wyglądem grafiki na FB" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Sterowanie wyglądem grafiki na FB)</div>
+        </div>
+      </div>
+
+      <!-- Dodatkowy kontener tekstowy pod zrzutem ekranu -->
+      <div class="note-block card-extra-note">
+        <p><span class="hl-navy-italic">Pro tip:</span> Publikować na Facebooku możesz na dwa sposoby:</p>
+        <ul>
+          <li><strong>Krótki tekst + karuzela:</strong> wrzucasz slajdy karuzeli, a w okienko na tekst wklejasz to, co dostałaś jako post FB.</li>
+          <li><strong>Długi tekst + grafika:</strong> w paczce ZIP, którą ściągniesz, znajdziesz pełny tekst z karuzeli. Możesz na Facebooku opublikować wtedy pojedynczą grafikę, którą dostaniesz w aplikacji plus treść całej karuzeli. Ale to opcja dla odważnych – treść karuzeli jest dość długa, a nie każdy lubi wrzucać długie posty.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Krok 7 -->
+    <section class="step-card" id="krok-7">
+      <div class="step-title">
+        <span class="step-num">Krok 7:</span>
+        <span class="step-heading-text">Slajd na Story</span>
+      </div>
+      <div class="step-content">
+        <p>Kliknij przycisk <span class="hl-burgundy-italic">Generuj slajd dla Story</span> – narzędzie natychmiast utworzy dopasowaną pionową planszę o proporcjach idealnych do relacji na Instagramie (9:16).</p>
+        
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> na grafice możesz wprowadzać własne reguły: zmieniać wielkość obrazka i czcionki, przesuwać obrazek myszką i przyciskami strzałek przenosić tytuł na górę lub na dół.
+        </div>
+      </div>
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-Generuj-slajd-na-Story.webp" alt="Krok 7 – Przycisk Generuj slajd na Story" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk Generuj slajd na Story)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-sterowania-wygladem-grafiki-na-Story.webp" alt="Krok 7 – Sterowanie wyglądem grafiki na Story" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Sterowanie wyglądem grafiki na Story)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 8 -->
+    <section class="step-card" id="krok-8">
+      <div class="step-title">
+        <span class="step-num">Krok 8:</span>
+        <span class="step-heading-text">Tekst na Instagram</span>
+      </div>
+      <div class="step-content">
+        <p>Aplikacja generuje zoptymalizowaną, skróconą wersję tekstu dopasowaną do limitów i specyfiki Instagrama wraz z dopasowanym pakietem kontekstowych hasztagów umieszczonych pod treścią.</p>
+      </div>
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-generowania-tekstu-na-IG.webp" alt="Krok 8 – Przyciski generowania tekstu na IG" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przyciski generowania tekstu na IG)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 9 -->
+    <section class="step-card" id="krok-9">
+      <div class="step-title">
+        <span class="step-num">Krok 9:</span>
+        <span class="step-heading-text">Materiał na LinkedIn (skąd wziąć PDF dla LinkedIn)</span>
+      </div>
+      <div class="step-content">
+        <p>Kliknij przycisk <span class="hl-burgundy-italic">Pobierz PDF dla LinkedIn</span> umieszczony pod edytorem tekstu, aby pobrać karuzelę przygotowaną w wymaganym przez LinkedIn formacie dokumentu wielostronicowego PDF.</p>
+      </div>
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przycisk-pobierania-PDF-dla-LinkedIn.webp" alt="Krok 9 – Przycisk pobierania PDF dla LinkedIn" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przycisk pobierania PDF dla LinkedIn)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 10 -->
+    <section class="step-card" id="krok-10">
+      <div class="step-title">
+        <span class="step-num">Krok 10:</span>
+        <span class="step-heading-text">Przerób karuzelę na wpis na bloga (jak wygenerować tekst na bloga)</span>
+      </div>
+      <div class="step-content">
+        <p>Skoro masz już gotowe materiały dla Social Media, to możesz wygenerowane materiały wykorzystać także do rozwoju strony internetowej – to przecież też część budowania Twojego wizerunku (i dobrze robi na wyszukiwalność w sieci).</p>
+        
+        <ul>
+          <li><span class="hl-navy-bold">Generowanie treści:</span> Zjedź w dół i znajdź przycisk <span class="hl-burgundy-italic">Generuj artykuł na bloga</span>. Kliknij go i daj AI chwilę, by wykonała zadanie – generowanie może potrwać kilkanaście sekund.</li>
+          <li><span class="hl-navy-bold">Kwestia pozycjonowania:</span> Aplikacja, zanim wygeneruje Twój tekst na bloga, robi szybkie rozeznanie, jakie słowa kluczowe powinny znaleźć się w tekście, aby dobrze się pozycjonował w poruszanym w karuzeli temacie. Nie jest to głęboka analiza (do tego są specjalistyczne narzędzia), ale masz gwarancję, że słowa kluczowe nie zostały dobrane na chybił-trafił.</li>
+        </ul>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Format, w jakim dostaniesz tekst, ułatwia jego publikację. AI za pomocą haszy (znak <code>#</code>) oznacza śródtytuły. Im więcej haszy, tym mniejsza ranga tytułu:
+          <ul>
+            <li>Jeśli tytuł zaczyna się od <code>##</code>, podczas publikacji powinnaś oznaczyć go jako nagłówek <code>H2</code>.</li>
+            <li>Jeśli zaczyna się od <code>###</code>, powinnaś go podczas publikacji oznaczyć jako nagłówek <code>H3</code>.</li>
+            <li>Jeśli zaczyna się bez żadnego hasza, jest to po prostu tekst zwykłego akapitu.</li>
+          </ul>
+        </div>
+
+        <ul>
+          <li><span class="hl-navy-bold">Generowanie grafiki:</span> Aplikacja automatycznie wygeneruje dla Ciebie grafikę, którą możesz umieścić jako okładkę we wpisie na blogu. Będzie na niej ta sama grafika, jaką widzisz na pierwszym slajdzie karuzeli, oraz kontener z tytułem karuzeli / wpisu.</li>
+          <li><span class="hl-navy-bold">Stylizacja okładki:</span> Możesz powiększyć lub zmniejszyć obrazek na grafice oraz swobodnie przesuwać go w jej obrębie. Możesz także zmniejszać i powiększać czcionkę tytułu oraz przesuwać sam kontener z tekstem.</li>
+        </ul>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Jeśli chcesz mieć samą grafikę, bez tytułu, po prostu złap myszką tytuł i przeciągnij go daleko poza grafikę – gotowe!
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> jeśli grafika zaciągnięta z karuzeli nie pasuje Ci do koncepcji na okładkę bloga, możesz wgrać własną. Warto! Bo po wgraniu własnej wciąż pobierzesz końcowy obrazek w najlepszym do publikacji w sieci formacie <code>WebP</code>.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Ale UWAGA:</span> Jeśli wyrzucisz tytuł poza grafikę, już go nie odzyskasz. To jednorazowa akcja.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Grafika zostanie automatycznie wygenerowana w formacie <code>WebP</code>. To optymalny format do publikacji w sieci, bo plik jest lekki i zachowuje doskonałą jakość.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Grafikę możesz pobrać osobno – ale nie musisz tego robić, bo zostanie dołączona wraz z innymi materiałami do ogólnej paczki ZIP, którą pobierzesz na koniec.
+        </div>
+      </div>
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-generowania-tekstu-na-bloga.webp" alt="Krok 10 – Przyciski generowania tekstu na bloga" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przyciski generowania tekstu na bloga)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-grafika-na-bloga-i-jej-przyciski.webp" alt="Krok 10 – Grafika na bloga i jej przyciski" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Grafika na bloga i jej przyciski)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 11 -->
+    <section class="step-card" id="krok-11">
+      <div class="step-title">
+        <span class="step-num">Krok 11:</span>
+        <span class="step-heading-text">Zamień swoją karuzelę w rolkę (Reels)</span>
+      </div>
+      <div class="step-content">
+        <p>Obserwujący lubią rolki, więc szkoda byłoby tego nie wykorzystać. Dlatego KaruSoula pomoże Ci zmienić slajdy karuzeli w lekko animowane slajdy, z których złożysz rolkę. Dokładnie polega to na tym, że aplikacja już wygenerowane slajdy karuzeli nałoży na animowane tła. W efekcie dostaniesz 10 mini klipów, bez dźwięku. Po pobraniu wrzucasz je na Instagrama i dodajesz muzykę już z Insta-biblioteki.</p>
+        
+        <ul>
+          <li><span class="hl-navy-bold">Jak zrobić slajdy na reela:</span> Zjedź do części pod wygenerowaną grafiką dla FB i slajdem na Story. Znajdziesz tam pole pracy o nazwie <span class="hl-burgundy-italic">Slajdy do Reels</span>.</li>
+          <li><span class="hl-navy-bold">Dwa warianty tła:</span> Zobaczysz dwa przyciski: <span class="hl-burgundy-italic">Generuj reels dark</span> i <span class="hl-burgundy-italic">Generuj reels Light</span>. Oba zrobią to samo, tyle że przycisk <em>dark</em> podłoży pod slajdy karuzeli ciemniejsze animowane tło, a przycisk <em>light</em> – jaśniejsze. Poza tym zawartość slajdów pozostanie taka sama.</li>
+        </ul>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Każdy ze slajdów możesz osobno pobrać lub z osobna odświeżyć, jeśli np. zmienisz coś na jednym ze slajdów karuzeli.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Ale UWAGA:</span> podczas generowania slajdów nie zamykaj i nie zmieniaj okna przeglądarki, bo to może zakłócić proces generacji. A proces ten może potrwać do 20 sekund, bo aplikacja musi każdy slajd wygenerować osobno jako klip wideo.
+        </div>
+
+        <div class="note-block">
+          <span class="hl-navy-italic">Pro tip:</span> Warto naprzemiennie generować reela z jasnym i ciemnym tłem, to lepiej wygląda na feedzie. Albo zmieniać odcień tła trójkami.
+        </div>
+      </div>
+
+      <!-- Zbalansowany układ: 3 grafiki w pionie po lewej, wideo po prawej o tej samej łącznej wysokości -->
+      <div class="reels-showcase">
+        <div class="reels-images-col">
+          <div class="image-box">
+            <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-generowania-reelsow.webp" alt="Krok 11 – Przyciski generowania reelsów" class="lightbox-trigger">
+            <div class="image-caption">Kliknij, aby powiększyć (Przyciski generowania Reels)</div>
+          </div>
+          <div class="image-box">
+            <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-wygenerowane-klipy-do-reel-light.webp" alt="Krok 11 – Wygenerowane klipy do Reels Light" class="lightbox-trigger">
+            <div class="image-caption">Kliknij, aby powiększyć (Wygenerowane klipy Reels – wersja Light)</div>
+          </div>
+          <div class="image-box">
+            <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-klipy-wersja-ciemna.webp" alt="Krok 11 – Wygenerowane klipy do Reels Dark" class="lightbox-trigger">
+            <div class="image-caption">Kliknij, aby powiększyć (Wygenerowane klipy Reels – wersja Dark)</div>
+          </div>
+        </div>
+
+        <div class="reels-video-col">
+          <div class="image-box">
+            <video src="https://raw.githubusercontent.com/KaruSoula/assets/main/07_Reel.mp4" autoplay loop muted playsinline controls></video>
+            <div class="image-caption">Podgląd przykładowego klipu wideo (07_Reel.mp4)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 12 -->
+    <section class="step-card" id="krok-12">
+      <div class="step-title">
+        <span class="step-num">Krok 12:</span>
+        <span class="step-heading-text">Scenariusz rolki</span>
+      </div>
+      <div class="step-content">
+        <p>Kliknij przycisk <span class="hl-burgundy-italic">Generuj scenariusz rolki</span>. System przygotuje zestaw konkretnych wskazówek: co mówić, jak zaplanować scenę oraz jak ustawić kadr i oświetlenie.</p>
+      </div>
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-przyciski-generowania-scenariusza-dla-rolki.webp" alt="Krok 12 – Przyciski generowania scenariusza dla rolki" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Przyciski generowania scenariusza dla rolki)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 13 -->
+    <section class="step-card" id="krok-13">
+      <div class="step-title">
+        <span class="step-num">Krok 13:</span>
+        <span class="step-heading-text">Wszystkie Twoje teksty</span>
+      </div>
+      <div class="step-content">
+        <ul>
+          <li>Wszystkie wygenerowane teksty znajdziesz w jednym miejscu. Okienka z tekstami są niewielkie, więc wygodniej będzie Ci edytować je już podczas wstawiania na SoMe.</li>
+          <li>Wszystkie wygenerowane teksty trafią do paczki ZIP podczas pobierania, ale możesz je także skopiować osobno: wystarczy, że najedziesz myszką na pole z tekstem i klikniesz w nie. Tekst skopiowany!</li>
+        </ul>
+      </div>
+      <div class="images-row single-left">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-wygenerowane-teksty.webp" alt="Krok 13 – Wygenerowane teksty i szybkie kopiowanie" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Wygenerowane teksty)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 14 -->
+    <section class="step-card" id="krok-14">
+      <div class="step-title">
+        <span class="step-num">Krok 14:</span>
+        <span class="step-heading-text">Pobierz całość elegancko!</span>
+      </div>
+      <div class="step-content">
+        <ul>
+          <li><span class="hl-navy-bold">Paczka ZIP:</span> Kliknij <span class="hl-burgundy-italic">Pobierz paczkę ZIP</span> (znajdziesz go m.in. pod oknem roboczym oraz na dole strony). Po krótkim generowaniu otrzymujesz kompletne archiwum.</li>
+          <li><span class="hl-navy-bold">Zawartość paczki:</span> Osobny folder ze slajdami karuzeli, grafika okładki FB, grafika Story, pliki .txt z treściami (FB, Instagram, scenariusz rolki) oraz zwięzła instrukcja.</li>
+          <li><span class="hl-navy-bold">Numeracja:</span> Pliki slajdów mają prefiksy (np. <code>01_Slajd</code>, <code>02_Slajd</code>), co gwarantuje poprawną kolejność po przeciągnięciu do publikatora Instagrama.</li>
+          <li><span class="hl-navy-bold">Pobieranie pojedyncze:</span> Każdy slajd i okładkę możesz też pobrać niezależnie klikając w dedykowany przycisk zapisu.</li>
+        </ul>
+      </div>
+      <div class="images-row">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-dolny-przycisk-pobierania-paczki-ZIP.webp" alt="Krok 14 – Dolny przycisk pobierania paczki ZIP" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Dolny przycisk pobierania paczki ZIP)</div>
+        </div>
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula-Atelier-g%C3%B3rny-przycisk-pobierania-ZIP.webp" alt="Krok 14 – Górny przycisk pobierania paczki ZIP" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Górny przycisk pobierania paczki ZIP)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Krok 15 -->
+    <section class="step-card" id="krok-15">
+      <div class="step-title">
+        <span class="step-num">Krok 15:</span>
+        <span class="step-heading-text">Poczuj się bezpiecznie (Archiwum Atelier)</span>
+      </div>
+      <div class="step-content">
+        <p>To, co wygenerowałaś i pobrałaś, nie znika! Gdybyś „zgubiła gdzieś” pobrany materiał, zawsze możesz wrócić do swojego <span class="hl-burgundy-italic">Archiwum</span>. Znajdziesz je na samym dole – a w nim masz zapisanych ostatnie 10 pobranych karuzel ze wszystkimi dodatkami. I każdą możesz pobrać dowolną ilość razy.</p>
+
+        <div class="note-block">
+          <span class="hl-navy-bold">Ale UWAGA:</span> Archiwum zapamiętuje tylko 10 ostatnio pobranych karuzel. Kiedy pobierzesz jedenastą, pierwsza znika z listy. Do listy pobranych wliczają się też karuzele pobrane więcej niż jeden raz – jeśli jakąś karuzelę np. 5 razy poprawiałaś i pobierałaś, zajmie ona 5 pozycji w Archiwum.
+        </div>
+      </div>
+      <div class="images-row full-width">
+        <div class="image-box">
+          <img src="https://raw.githubusercontent.com/KaruSoula/assets/main/KaruSoula%20Atelier%2C%20archiwum%20pobranych%20karuzel.webp" alt="Krok 15 – Panel Archiwum i historia pobrań" class="lightbox-trigger">
+          <div class="image-caption">Kliknij, aby powiększyć (Widok Archiwum na dole aplikacji)</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p><span class="hl-navy-bold">Potrzebujesz pomocy?</span> W prawym górnym rogu aplikacji znajdziesz bezpośredni przycisk kontaktu w sprawie wsparcia lub rozbudowy bazy grafik.</p>
+    </footer>
+  </div>
+
+  <!-- Modal Lightbox -->
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Podgląd powiększonego zrzutu ekranu">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij podgląd">&times;</button>
+    <img id="lightboxImage" src="" alt="Powiększenie zrzutu ekranu">
+  </div>
+
+  <script>
+    const modal = document.getElementById('lightboxModal');
+    const modalImg = document.getElementById('lightboxImage');
+    const closeBtn = document.getElementById('lightboxClose');
+    const triggers = document.querySelectorAll('.lightbox-trigger');
+
+    triggers.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.classList.add('active');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    const closeModal = () => {
+      modal.classList.remove('active');
+      modalImg.src = '';
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
